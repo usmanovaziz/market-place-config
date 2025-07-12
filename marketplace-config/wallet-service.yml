@@ -1,0 +1,105 @@
+spring:
+  application:
+    name: wallet-service
+
+  cloud:
+    config:
+      enabled: false
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: wallet-service-group
+      enable-auto-commit: true
+      auto-offset-reset: earliest
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "*"
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://127.0.0.1:5432/learn_grafana?createDatabaseIfNotExist=true
+    username: postgres
+    password: postgres
+
+  sql:
+    init:
+      mode: embedded
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: PostgreSQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        show_sql: true
+        enable_lazy_load_no_trans: true
+        event:
+          merge:
+            entity_copy_observer: allow
+    open-in-view: false
+
+  data:
+    redis:
+      repositories:
+        enabled: false
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  servlet:
+    session:
+      timeout: 30m
+    multipart:
+      enabled: true
+      max-file-size: 40MB
+      max-request-size: 40MB
+
+  mail:
+    host: sandbox.smtp.mailtrap.io
+    port: 2525
+    username: d910b4d14c703b
+    password: 0de83da1f143e6
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  port: 8082
+  servlet:
+    session:
+      timeout: 30m
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+
+resilience4j:
+  retry:
+    instances:
+      userService:
+        max-attempts: 3
+        wait-duration: 5s
+        retry-exceptions:
+          - org.springframework.web.client.HttpServerErrorException
+          - java.net.SocketTimeoutException
+          - java.lang.ClassNotFoundException
+          - java.lang.RuntimeException

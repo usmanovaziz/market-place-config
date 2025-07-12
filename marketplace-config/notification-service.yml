@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: notification-service
+
+  cloud:
+    config:
+      enabled: false
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: notification-service-group
+      enable-auto-commit: true
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: com.usmanov.notificationservicedemo.events
+            value:
+              default:
+                type: com.usmanov.notificationservicedemo.events.UserCreatedEvent
+
+  mail:
+    host: sandbox.smtp.mailtrap.io
+    port: 2525
+    username: d910b4d14c703b
+    password: 0de83da1f143e6
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  port: 8086
