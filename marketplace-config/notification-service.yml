@@ -4,7 +4,7 @@ spring:
 
   cloud:
     config:
-      enabled: false
+      enabled: true
 eureka:
   client:
     service-url:
@@ -32,8 +32,8 @@ eureka:
   mail:
     host: sandbox.smtp.mailtrap.io
     port: 2525
-    username: d910b4d14c703b
-    password: 0de83da1f143e6
+    username: 69b13063cd48d4
+    password: a8ceb0e36e8366
     properties:
       mail:
         smtp:
