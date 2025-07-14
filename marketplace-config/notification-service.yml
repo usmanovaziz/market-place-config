@@ -15,19 +15,17 @@ eureka:
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
-      group-id: notification-service-group
+      group-id: wallet-service-group
       enable-auto-commit: true
       auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       properties:
         spring:
           json:
             trusted:
-              packages: com.usmanov.notificationservicedemo.events
-            value:
-              default:
-                type: com.usmanov.notificationservicedemo.events.UserCreatedEvent
+              packages: "*"
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
 
   mail:
     host: sandbox.smtp.mailtrap.io
