@@ -15,7 +15,7 @@ eureka:
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
-      group-id: wallet-service-group
+      group-id: notification-service-group
       enable-auto-commit: true
       auto-offset-reset: earliest
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
