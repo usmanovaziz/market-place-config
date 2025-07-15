@@ -2,6 +2,7 @@ spring:
   config:
     activate:
       on-profile: default
+
   cloud:
     config:
       allowOverride: true
@@ -12,6 +13,11 @@ eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
-    serviceUrl:
+    service-url:
       defaultZone: http://localhost:8761/eureka/
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
