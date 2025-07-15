@@ -31,11 +31,11 @@ eureka:
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
   datasource:
-    driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://127.0.0.1:5432/learn_grafana
     username: postgres
     password: postgres
-
+    driver-class-name: org.postgresql.Driver
+    
   sql:
     init:
       mode: embedded
@@ -43,8 +43,8 @@ eureka:
   jpa:
     hibernate:
       ddl-auto: update
-    database: PostgreSQL
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+    
     properties:
       hibernate:
         jdbc:
