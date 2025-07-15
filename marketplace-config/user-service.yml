@@ -5,37 +5,13 @@ spring:
   cloud:
     config:
       enabled: true
-      
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-    register-with-eureka: true
-    fetch-registry: true      
-
-  kafka:
-    bootstrap-servers: localhost:9092
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      acks: 1
-      retries: 3
-      batch-size: 16384
-      properties:
-        batch:
-          size: 16384
-        linger:
-          ms: 5
-        compression:
-          type: snappy
-    consumer:
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
   datasource:
     url: jdbc:postgresql://127.0.0.1:5432/learn_grafana
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
-    
+
   sql:
     init:
       mode: embedded
@@ -44,7 +20,6 @@ eureka:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-    
     properties:
       hibernate:
         jdbc:
@@ -90,6 +65,30 @@ eureka:
           starttls:
             enable: true
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+kafka:
+  bootstrap-servers: localhost:9092
+  producer:
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    acks: 1
+    retries: 3
+    batch-size: 16384
+    properties:
+      batch:
+        size: 16384
+      linger:
+        ms: 5
+      compression:
+        type: snappy
+  consumer:
+    value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
 server:
   port: 8081
   servlet:
@@ -104,4 +103,3 @@ management:
     web:
       exposure:
         include: prometheus
-        
