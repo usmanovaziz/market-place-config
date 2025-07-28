@@ -23,16 +23,17 @@ spring:
 
   mail:
     from: azikusmanov882@gmail.com
-    host: sandbox.smtp.mailtrap.io
-    port: 2525
-    username: 69b13063cd48d4
-    password: a8ceb0e36e8366
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
+    smtp:
+      host: sandbox.smtp.mailtrap.io
+      port: 2525
+      username: 69b13063cd48d4
+      password: a8ceb0e36e8366
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
 
 eureka:
   client:
